@@ -13,25 +13,31 @@ class APIFetcher:
         self.subdomain = subdomain
 
     def getTickets(self):
-        link = "https://" + self.subdomain + "/api/v2/tickets.json"
-        response = requests.get(link, auth=(self.email, self.password))
-        if response.status_code != 200:
-            fail_message = 'Status:' + str(response.status_code) + "\n" + \
-                           'Problem with the request. Exiting...'
-            print(fail_message)
+        try:
+            link = "https://" + self.subdomain + "/api/v2/tickets.json"
+            response = requests.get(link, auth=(self.email, self.password))
+            if response.status_code != 200:
+                fail_message = 'Status:' + str(response.status_code) + "\n" + \
+                               'Problem with the request. Exiting...'
+                print(fail_message)
+                print("You may have entered incorrect credentials, please run "
+                      "and try again!")
+                exit()
+
+            data = response.json()
+            tickets = []
+            for ticket in data["tickets"]:
+                t_id = ticket["id"]
+                created_at = ticket["created_at"]
+                description = ticket["description"]
+                title = ticket["subject"]
+                lastUpdate = ticket["updated_at"]
+                t = Ticket(t_id, created_at,
+                           description, title, lastUpdate)
+                tickets.append(t)
+            return tickets
+        except requests.exceptions.ConnectionError:
             print("You may have entered incorrect credentials, please run and "
                   "try again!")
+            print("Exiting program...")
             exit()
-
-        data = response.json()
-        tickets = []
-        for ticket in data["tickets"]:
-            t_id = ticket["id"]
-            created_at = ticket["created_at"]
-            description = ticket["description"]
-            title = ticket["subject"]
-            lastUpdate = ticket["updated_at"]
-            t = Ticket(t_id, created_at,
-                       description, title, lastUpdate)
-            tickets.append(t)
-        return tickets
