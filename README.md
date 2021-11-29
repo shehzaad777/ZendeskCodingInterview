@@ -6,6 +6,7 @@ First things first, some packages will need to be installed, they are listed as 
 1. typing (can be installed using pip, I believe the command is pip3 install typing , if running pip3)
 2. unittest (can be installed using pip, I believe the command is pip3 install unittest , if running pip3), you will specifically need the mock module
 3. datetime (can be installed using pip, I believe the command is pip3 install datetime , if running pip3)
+
 NOTE: Sometimes IDEs or even OSs act differently when using modules so please install as needed by your computer requirements, I provided the pip command as a 
 general guideline.
 
