@@ -17,12 +17,13 @@ class Main:
                             "Enter 'update' to update the current tickets " + \
                             "available, this will fetch all tickets again. " + \
                             "\nEnter 'quit' to quit the program"
-        self.programManager = Controller()
 
     def run(self):
         print("\n")
         print(self.initialMessage)
+        self.programManager = Controller()
         while True:
+            print("\n")
             print(self.toUseMessage)
             userInput = input("Please enter your selected option:")
             if userInput == "quit":

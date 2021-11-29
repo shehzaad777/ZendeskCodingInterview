@@ -7,7 +7,16 @@ class Controller:
     dbFetcher: APIFetcher
 
     def __init__(self):
-        self.dbFetcher = APIFetcher()
+        self.loadSequence()
+
+    def loadSequence(self):
+        print("You will now need to enter a few details so that we can find"
+              " your tickets. All fields are case sensitive.\n")
+        subdomain = input("Please enter your subdomain (will be in the form "
+                          "'demo.zendesk.com')")
+        email = input("Please enter your email: \n")
+        password = input("Please enter your password: \n")
+        self.dbFetcher = APIFetcher(email, password, subdomain)
         self.ticketManager = Tickets(self.dbFetcher.getTickets())
 
     def callCorrectMethod(self, selection: str):
