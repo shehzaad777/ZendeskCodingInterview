@@ -1,5 +1,5 @@
 from unittest.mock import patch
-from main import APIFetcher
+from APIFetcher import APIFetcher
 from main import Main
 
 
