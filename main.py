@@ -45,6 +45,7 @@ def calcPrevNewLimits(curr: List[int]):
         limits.append(curr[1] - 25)
     else:
         closestBound = curr[1] // 25
+        closestBound = 25 * closestBound
         limits.append(closestBound)
     return limits
 

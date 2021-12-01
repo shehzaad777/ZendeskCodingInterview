@@ -15,6 +15,7 @@ class APIFetcher:
     def getTickets(self):
         try:
             link = "https://" + self.subdomain + "/api/v2/tickets.json"
+            print("loading...")
             response = requests.get(link, auth=(self.email, self.password))
             if response.status_code != 200:
                 fail_message = 'Status:' + str(response.status_code) + "\n" + \

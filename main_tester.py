@@ -1,35 +1,24 @@
 from unittest.mock import patch
 from APIFetcher import APIFetcher
-from main import Main
+from main import calcNextNewLimits, calcPrevNewLimits
 
 
-def test_getTickets():
-    main = Main()
-    m = main.programManager.callCorrectMethod("1")
-    af = APIFetcher()
-    len_t = len(af.getTickets())
-    assert (len(m) == len_t)
-    assert (len_t == 100)
+# I HAD TESTS FOR THE APIFETCHER BUT REMOVED SINCE IT WOULD NEED CREDENTIALS
+
+def test_calcPrevNewLimits_standard():
+    assert calcPrevNewLimits([25, 50]) == [0, 25]
 
 
-def get_input(text):
-    return input(text)
+def test_calcPrevNewLimits_non_25():
+    assert calcPrevNewLimits([50, 67]) == [25, 50]
 
 
-def test_correct_ticket_by_ID():
-    main = Main()
-
-    with patch('builtins.input', return_value="3"):
-        t = main.programManager.listAllTickets()[2]
-        assert (main.programManager.callCorrectMethod("2") == t)
+def test_calcNextNewLimits_standard():
+    assert calcNextNewLimits([25, 50], 100) == [50, 75]
 
 
-def test_wrong_ticket_by_ID():
-    main = Main()
-
-    with patch('builtins.input', return_value="200"):
-        ret = "No ticket found by that ID."
-        assert (main.programManager.callCorrectMethod("2") == ret)
+def test_calcNextNewLimits_non_25():
+    assert calcNextNewLimits([50, 75], 87) == [75, 86]
 
 
 if __name__ == '__main__':
