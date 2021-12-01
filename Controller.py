@@ -11,9 +11,10 @@ class Controller:
 
     def loadSequence(self):
         print("You will now need to enter a few details so that we can find"
-              " your tickets. All fields are case sensitive.\n")
-        subdomain = input("Please enter your subdomain (will be in the form "
-                          "'demo.zendesk.com')")
+              " your tickets.\nAll fields are case sensitive.\n")
+        subdomain = input("Please enter your subdomain (This takes the form of "
+                          "'{subdomain}'.zendesk.com)\nONLY enter the subdomain"
+                          " itself: \n")
         email = input("Please enter your email: \n")
         password = input("Please enter your password: \n")
         self.dbFetcher = APIFetcher(email, password, subdomain)

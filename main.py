@@ -33,8 +33,8 @@ class Main:
             if type(response) == list:
                 if len(response) > 25:
                     pageView(response)
-                for r in response:
-                    print(r)
+                else:
+                    [print(r) for r in response]
             else:
                 print(response)
 
